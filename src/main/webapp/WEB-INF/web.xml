@@ -3,5 +3,17 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name>Avito price scanner</display-name>
+
+  <servlet>
+    <servlet-name>Scraping</servlet-name>
+    <servlet-class>ru.r5am.servlets.Scraping</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Scraping</servlet-name>
+    <url-pattern>/Scraping</url-pattern>
+  </servlet-mapping>
+
 </web-app>
+
