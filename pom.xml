@@ -4,13 +4,16 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+
   <groupId>ru.r5am</groupId>
   <artifactId>AvitoMedianaPrice</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
 
+
   <name>AvitoMedianaPrice Maven Webapp</name>
   <url>https://www.r5am.ru</url>
+
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,14 +21,8 @@
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
-  <dependencies>
 
-    <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <version>6.14.3</version>
-<!--      <scope>test</scope>-->
-    </dependency>
+  <dependencies>
 
     <dependency>
       <groupId>com.codeborne</groupId>
@@ -52,12 +49,6 @@
     </dependency>
 
     <dependency>
-      <groupId>org.aeonbits.owner</groupId>
-      <artifactId>owner</artifactId>
-      <version>1.0.10</version>
-    </dependency>
-
-    <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.8</version>
@@ -70,8 +61,8 @@
       <version>2.9.9</version>
     </dependency>
 
-
   </dependencies>
+
 
   <build>
     <finalName>AvitoMedianaPrice</finalName>
