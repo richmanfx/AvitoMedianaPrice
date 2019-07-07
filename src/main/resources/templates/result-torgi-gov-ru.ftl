@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Realty Objects</title>
+    <link rel="stylesheet" type="text/css" href="../../webapp/css/real.css">
+</head>
+
+<body>
+    <h2>Основные параметры</h2>
+    <table class="parameters">
+        <tr>
+            <td class="top-align">
+                <h2>Статистические:</h2>
+                <ul>
+                    <li>Количество доходных месяцев в году: <span class="param-value">{{ settings.profitMonths }}</span></li>
+                    <li>Средняя стоимость аренды: <span class="param-value">{{ settings.averageRental }}</span> руб/кв.м. в месяц </li>
+                </ul>
+            </td>
+            <td class="top-align">
+                <h2>Разовые затраты:</h2>
+                <ul>
+                    <li>Расходы на запуск объекта: <span class="param-value">{{ settings.runningCost }}</span> рублей </li>
+                    <li>Стоимость регистрации договора: <span class="param-value">{{ settings.contractRegistration }}</span> рублей </li>
+                </ul>
+            </td>
+            <td class="top-align">
+                <h2>Расценки:</h2>
+                <ul>
+                    <li>Отопление: <span class="param-value">{{ settings.monthlyHeating }}</span> руб/кв.м. в месяц </li>
+                    <li>Предварительный ремонт: <span class="param-value">{{ settings.priorRepair }}</span> руб/кв.м. </li>
+                    <li>Бухгалтерское обслуживание: <span class="param-value">{{ settings.accountingService }}</span> руб/мес. </li>
+                    <li>Обслуживание ЖЭКом: <span class="param-value">{{ settings.housingOfficeMaintenance }}</span> руб/кв.м. в месяц </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+<br><br>
+    <h1>Объекты недвижимости</h1>
+
+    <table class="real-table">
+        <caption>{{ settings.propertyLocation }}, {{ settings.contractType }}</caption>
+        <tr>{% for title in titles %}
+            <th>{{title}}</th>{% endfor %}
+        </tr>
+
+        {% for object in objects %}
+        <tr>
+            <td class="center-align">{{object.orderNumber}}</td>
+            <td><a href="{{object.webLink}}">{{object.notificationNumber}}</a></td>
+
+            {% if object.profitMargin|int() >= object.requiredProfitMargin|int() %}
+            <td class="gud-payback">{{object.profitMargin}}</td>
+            {% else %}
+            <td class="bad-payback">{{object.profitMargin}}</td>
+            {% endif %}
+
+            <td>{{object.address}}</td>
+            <td class="right-align">{{object.area}}</td>
+            <td>{{object.auctionData}}</td>
+            <td>{{object.closingApplicationsDate}}</td>
+            <td>{{object.guaranteeAmount}}</td>
+            <td class="right-align">{{object.lossFreeRental}}</td>
+            <td class="right-align">{{object.monthlyProfit}}</td>
+            <td class="right-align">{{object.monthlyCost}}</td>
+            <td class="right-align">{{object.monthlyRental}}</td>
+            <td class="center-align">{{object.rentalPeriod}}</td>
+            <td class="right-align">{{object.monthlyHeating}}</td>
+            <td class="right-align">{{object.housingOfficeMaintenance}}</td>
+            <td class="right-align">{{object.yearProfit}}</td>
+            <td class="right-align">{{object.yearRental}}</td>
+            <td class="right-align">{{object.yearInsurance}}</td>
+            <td class="right-align">{{object.priorRepair}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+
+
+
+</body>
+</html>
