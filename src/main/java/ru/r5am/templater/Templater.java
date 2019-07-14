@@ -1,14 +1,13 @@
 package ru.r5am.templater;
 
-import com.google.common.base.Charsets;
-import com.google.common.collect.Maps;
+import java.net.URL;
+import java.io.File;
+import java.util.Map;
+import java.io.IOException;
 import com.hubspot.jinjava.Jinjava;
 import org.apache.commons.io.IOUtils;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Map;
+import com.google.common.collect.Maps;
+import com.google.common.base.Charsets;
 
 public class Templater {
 

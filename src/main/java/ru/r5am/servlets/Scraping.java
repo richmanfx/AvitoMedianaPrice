@@ -1,17 +1,26 @@
 package ru.r5am.servlets;
 
-import com.google.common.collect.Maps;
-import ru.r5am.templater.Templater;
 
-import javax.servlet.http.*;
+import java.util.Map;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
+import javax.servlet.http.*;
+import com.google.common.collect.Maps;
+
+import ru.r5am.SelenideSetUp;
+import ru.r5am.templater.Templater;
+
 
 public class Scraping extends HttpServlet {
 
     @Override
-    public void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doPost (HttpServletRequest request, HttpServletResponse response) {
+
+
+        // Сконфигурировать Selenide
+        SelenideSetUp selenideSetUp = new SelenideSetUp();
+        selenideSetUp.selenideStart();
+
 
         // Параметры из формы
         String objectType = request.getParameter("object_type");
@@ -25,14 +34,15 @@ public class Scraping extends HttpServlet {
 
         response.setContentType("text/html");
         Templater templater = new Templater();
-        PrintWriter printWriter = response.getWriter();
-        printWriter.println(templater.getPage("template1.ftl", data));
+        try {
+            PrintWriter printWriter = response.getWriter();
+            data.put("Error", "Ошибки нет");
+            printWriter.println(templater.getPage("template1.ftl", data));
+            printWriter.close();
+        } catch (IOException ex) {
+            data.put("Error", ex);
+        }
 
-//        printWriter.printf("Тип объекта: %s<br>", objectType);
-//        printWriter.printf("Минимальная площадь: %s<br>", minArea);
-//        printWriter.printf("Максимальная площадь: %s<br>", maxArea);
-
-        printWriter.close();
     }
 
 }
