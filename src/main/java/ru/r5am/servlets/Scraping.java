@@ -27,7 +27,7 @@ public class Scraping extends HttpServlet {
         String minArea = request.getParameter("min_area");
         String maxArea = request.getParameter("max_area");
 
-        Map<String, Object> forScrapingData = Maps.newHashMap();
+        Map<String, String> forScrapingData = Maps.newHashMap();
         forScrapingData.put("objectType", objectType);
         forScrapingData.put("minArea", minArea);
         forScrapingData.put("maxArea", maxArea);
@@ -47,7 +47,7 @@ public class Scraping extends HttpServlet {
             printWriter.println(templater.getPage("scraping-result.ftl", forScrapingData));
             printWriter.close();
         } catch (IOException ex) {
-            forScrapingData.put("Error", ex);
+            forScrapingData.put("Error", ex.toString());
         }
 
     }

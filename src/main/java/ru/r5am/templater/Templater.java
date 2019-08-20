@@ -2,7 +2,6 @@ package ru.r5am.templater;
 
 import java.net.URL;
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.io.IOException;
 import com.hubspot.jinjava.Jinjava;
@@ -18,7 +17,7 @@ public class Templater {
      * @param data Словать с данными
      * @return Сгенерированная HTML страница
      */
-    public String getPage(String templateName, Map<String, Object> data) throws IOException {
+    public String getPage(String templateName, Map<String, String> data) throws IOException {
 
         String templatesDir = "templates";
         Jinjava jinjava = new Jinjava();
@@ -27,7 +26,7 @@ public class Templater {
 
 
         URL url = getClass().getResource(File.separator + templatesDir + File.separator + templateName);
-        String template = IOUtils.toString(url, StandardCharsets.UTF_8);
+        String template = IOUtils.toString(url, Charsets.UTF_8);
 
         return jinjava.render(template, context);
     }
