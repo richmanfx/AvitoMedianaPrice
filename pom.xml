@@ -80,6 +80,12 @@
       <version>2.5.1</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.aeonbits.owner</groupId>
+      <artifactId>owner</artifactId>
+      <version>1.0.10</version>
+    </dependency>
+
   </dependencies>
 
 
