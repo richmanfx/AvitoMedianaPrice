@@ -47,6 +47,11 @@ public class DirectScraping {
      */
     private void setSearchFilters(Map<String, String> forScrapingData) {
 
+        // Выбрать станции метро
+        if (!"".equals(forScrapingData.get("metro"))) {
+            findPage.metroSet(forScrapingData.get("metro"));
+        }
+
         // Выбрать аренду
         findPage.rentSet();
 
@@ -58,6 +63,8 @@ public class DirectScraping {
 
         // Ввести максимальную площадь
         findPage.maxAreaInput(forScrapingData.get("maxArea"));
+
+
 
     }
 

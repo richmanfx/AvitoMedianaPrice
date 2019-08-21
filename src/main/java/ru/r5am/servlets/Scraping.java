@@ -26,11 +26,13 @@ public class Scraping extends HttpServlet {
         String objectType = request.getParameter("object_type");
         String minArea = request.getParameter("min_area");
         String maxArea = request.getParameter("max_area");
+        String metro = request.getParameter("metro");
 
         Map<String, String> forScrapingData = Maps.newHashMap();
         forScrapingData.put("objectType", objectType);
         forScrapingData.put("minArea", minArea);
         forScrapingData.put("maxArea", maxArea);
+        forScrapingData.put("metro", metro);
 
         // Скрапинг
         Map<String, Object> scrapResult = Maps.newHashMap();

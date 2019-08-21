@@ -54,7 +54,18 @@ public class FindPage extends BasePage {
      * Нажать кнопку поиска
      */
     public void searchButtonPress() {
-        $(By.xpath("//button[contains(@data-marker,'search-filters')]")).click();
+            $(By.xpath("//button[contains(@data-marker,'search-filters')]")).click();
     }
 
+    /**
+     * Нажать ссылку выбора станции метро
+     * @param metro Название станции метро
+     */
+    public void metroSet(String metro) {
+        $(By.xpath("//div[@data-current-tab='metro']")).click();
+
+        $(By.xpath(String.format("//*[@class='label' and text()='%s']", metro))).click();
+
+        $(By.xpath("//button[contains(@data-marker,'popup-location/save-button')]")).click();
+    }
 }
