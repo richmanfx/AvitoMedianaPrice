@@ -4,11 +4,27 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Avito Price</title>
+
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="css/real.css">
+
 </head>
 
 <body>
-    <h1>Параметры объекта</h1>
+
+
+<div id="p_preloader">
+    <div class="preload">
+        <span class="svg_anm"></span>
+            <br>Ждите<br>
+        <small>идет скрапинг</small>
+    </div>
+</div>
+
+
+<h1>Параметры объекта</h1>
 
     <form method="post" action="Scraping">
         <fieldset>
@@ -40,8 +56,10 @@
             </p>
 
         </fieldset>
-        <p><input type="submit" value="Поиск"></p>
+        <p><input type="submit" id="search_button" value="Поиск"></p>
     </form>
+
+    <script src="js/index.js"></script>
 
 </body>
 
