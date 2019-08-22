@@ -1,14 +1,21 @@
 package ru.r5am;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.r5am.pageobjects.FindPage;
+import ru.r5am.pageobjects.ResultPage;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.*;
 
 public class DirectScraping {
 
+
+    private static final Logger log = LogManager.getLogger();
     private FindPage findPage = new FindPage();
+    private ResultPage resultPage = new ResultPage();
 
     /**
      * Непосредственно скрапинг
@@ -27,18 +34,50 @@ public class DirectScraping {
         // Искать
         searching();
 
+        // Собрать результаты со всех страниц
+        allObjectsResultsCollect();
+
         // Закрыть браузер
         close();
+    }
+
+    /**
+     * Собрать результаты по объектам на всех страницах
+     */
+    private void allObjectsResultsCollect() {
+
+        // Собрать иформацию об объектах на текущей странице
+        ArrayList<Integer> price = new ArrayList<>();
+        getOnePageObjectsPrice(price);
+
+        // Добавить к основной коллекци
+
+
+        // Есть ли следующая страница
+
+
+
+
+
+    }
+
+    /**
+     * Собрать цены на одной странице
+     * @param price Цена
+     */
+    private void getOnePageObjectsPrice(ArrayList<Integer> price) {
+
+        // Количество объектов только на данной странице
+        int onPageObjectsQuantity = resultPage.getObjectsOnPage();
+        log.debug("Objects quantity on page: {}", onPageObjectsQuantity);
     }
 
     /**
      * Поиск объектов
      */
     private void searching() {
-
         // Нажать кнопку поиска объектов
         findPage.searchButtonPress();
-
     }
 
     /**
@@ -63,8 +102,6 @@ public class DirectScraping {
 
         // Ввести максимальную площадь
         findPage.maxAreaInput(forScrapingData.get("maxArea"));
-
-
 
     }
 
