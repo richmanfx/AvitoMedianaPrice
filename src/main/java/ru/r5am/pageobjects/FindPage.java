@@ -58,14 +58,21 @@ public class FindPage extends BasePage {
     }
 
     /**
-     * Нажать ссылку выбора станции метро
+     * Выбрать требуемые станции метро
      * @param metro Название станции метро
      */
     public void metroSet(String metro) {
+
+        // Нажать ссылку выбора станции метро
         $(By.xpath("//div[@data-current-tab='metro']")).click();
 
-        $(By.xpath(String.format("//*[@class='label' and text()='%s']", metro))).click();
+        // Перебрать все введённые станции метро
+        String[] metroList = metro.split(",");
+        for (String station: metroList) {
+            $(By.xpath(String.format("//*[@class='label' and text()='%s']", station.trim()))).click();
+        }
 
+        // Кнопка
         $(By.xpath("//button[contains(@data-marker,'popup-location/save-button')]")).click();
     }
 }
