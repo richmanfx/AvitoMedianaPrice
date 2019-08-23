@@ -1,6 +1,7 @@
 package ru.r5am.servlets;
 
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,7 +36,7 @@ public class Scraping extends HttpServlet {
         forScrapingData.put("metro", metro);
 
         // Скрапинг
-        Map<String, Object> scrapResult = Maps.newHashMap();
+        ArrayList<Integer> scrapResult = new ArrayList<>();
         DirectScraping directScraping = new DirectScraping();
         directScraping.scraping(forScrapingData, scrapResult);
 

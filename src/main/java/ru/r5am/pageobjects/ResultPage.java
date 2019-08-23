@@ -18,6 +18,7 @@ import static com.codeborne.selenide.Selenide.$$;
 public class ResultPage extends BasePage {
 
     private static final Logger log = LogManager.getLogger();
+    private String nextPageXpath = "//div[contains(@class,'pagination-nav')]/a[contains(text(),'Следующая страница')]";
 
     /**
      * Выбрать отображение арендной платы в "₽ в месяц за м²"
@@ -64,5 +65,24 @@ public class ResultPage extends BasePage {
             }
 
         }
+    }
+
+    /**
+     * Проверить существует ли следующая страница
+     * @return true - страница существует, иначе - false
+     */
+    public boolean existNextPage() {
+        boolean result = false;
+        if($(By.xpath(nextPageXpath)).exists()) {
+            result = true;
+        }
+        return result;
+    }
+
+    /**
+     * Перейти на следующую страницу
+     */
+    public void goToNextPage() {
+        $(By.xpath(nextPageXpath)).click();
     }
 }

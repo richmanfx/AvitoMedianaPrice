@@ -6,6 +6,7 @@ import ru.r5am.pageobjects.FindPage;
 import ru.r5am.pageobjects.ResultPage;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -21,7 +22,7 @@ public class DirectScraping {
      * @param forScrapingData Параметры для скрапинга, введённые через форму в index.html
      * @param scrapResult Результаты скрапинга
      */
-    public void scraping(Map<String, String> forScrapingData, Map<String, Object> scrapResult) {
+    public void scraping(Map<String, String> forScrapingData, List<Integer> scrapResult) {
 
 
         // Открыть сайт
@@ -33,8 +34,12 @@ public class DirectScraping {
         // Искать
         searching();
 
+        // Выставить цены в рублях в месяц за квадратный метр
+        resultPage.rentTypeDisplaySet("в месяц за м");
+
         // Собрать результаты со всех страниц
         allObjectsResultsCollect(scrapResult);
+        log.info("Цены всех страниц: {}", scrapResult);
 
         // Закрыть браузер
         close();
@@ -44,21 +49,34 @@ public class DirectScraping {
      * Собрать результаты по объектам на всех страницах
      * @param scrapResult Результат скрапинга
      */
-    private void allObjectsResultsCollect(Map<String, Object> scrapResult) {
+    private void allObjectsResultsCollect(List<Integer> scrapResult) {
 
         // Собрать иформацию об объектах на текущей странице
         ArrayList<Integer> prices = new ArrayList<>();
         getOnePageObjectsPrice(prices);
-        log.info("Цены: {}", prices);
+        log.debug("Цены одной страницы: {}", prices);
 
         // Добавить к основной коллекци
+        scrapResult.addAll(prices);
 
+        // *******************************************************************************
+        // Для отладки: скрапить только первую страницу - закомментировать дальше
+        // *******************************************************************************
 
-        // Есть ли следующая страница
+        log.debug("Есть следующая страница? {}", resultPage.existNextPage());
 
+        if(resultPage.existNextPage()) {    // Условие выхода из рекурсии - нет следующей страницы
 
+            // Перейти на следующую страницу
+            resultPage.goToNextPage();
 
+            // Рекурсия
+            allObjectsResultsCollect(scrapResult);
+        }
 
+        // *******************************************************************************
+        // Для отладки: скрапить только первую страницу - закомментировать до этого места
+        // *******************************************************************************
 
     }
 
@@ -72,8 +90,8 @@ public class DirectScraping {
         int onPageObjectsQuantity = resultPage.getObjectsOnPage();
         log.debug("Objects quantity on page: {}", onPageObjectsQuantity);
 
-        // Выставить цены в рублях в месяц за квадратный метр
-        resultPage.rentTypeDisplaySet("в месяц за м");
+//        // Выставить цены в рублях в месяц за квадратный метр
+//        resultPage.rentTypeDisplaySet("в месяц за м");
 
         // Цены
         resultPage.getPrices(prices);
