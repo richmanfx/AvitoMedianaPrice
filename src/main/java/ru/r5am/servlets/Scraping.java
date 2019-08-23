@@ -20,8 +20,7 @@ public class Scraping extends HttpServlet {
 
 
         // Сконфигурировать Selenide
-        SelenideSetUp selenideSetUp = new SelenideSetUp();
-        selenideSetUp.selenideStart();
+        SelenideSetUp.selenideStart();
 
         // Параметры из формы
         String objectType = request.getParameter("object_type");
@@ -39,6 +38,11 @@ public class Scraping extends HttpServlet {
         ArrayList<Integer> scrapResult = new ArrayList<>();
         DirectScraping directScraping = new DirectScraping();
         directScraping.scraping(forScrapingData, scrapResult);
+
+        // Максимальную и минимальную цены удалить
+        directScraping.minMaxRemove(scrapResult);
+
+        // Рассчитать медианную цену
 
 
         // Вывод результата
