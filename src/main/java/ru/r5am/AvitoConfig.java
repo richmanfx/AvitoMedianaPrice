@@ -14,7 +14,7 @@ public interface AvitoConfig extends Config {
     String remoteSeleniumHubPort();
 
     // Размер окна браузера
-    @DefaultValue("1920x1080")
+    @DefaultValue("1600x900")
     String browserSize();
 
 }

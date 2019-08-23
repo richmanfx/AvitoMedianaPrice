@@ -21,7 +21,8 @@ public class FindPage extends BasePage {
      * @param checkboxLabel Лэйбл чекбокса
      */
     public void typeObjectCheckboxSet(String checkboxLabel) {
-        $(By.xpath(String.format("//form//span[contains(text(),'%s')]", checkboxLabel))).click();
+        String checkboxXpath = String.format("//form//span[contains(text(),'%s')]", checkboxLabel);
+        $(By.xpath(checkboxXpath)).scrollTo().click();
     }
 
     /**
@@ -46,10 +47,12 @@ public class FindPage extends BasePage {
      * @param area Значение площади
      */
     private void areaInput(String placeholder, String area) {
-        $(By.xpath(String.format(
+
+        String inputXpath = String.format(
                 "//span[text()='Площадь, м²']/../../..//input[contains(@class,'input-input') and @placeholder='%s']",
-                placeholder)
-        )).setValue(area);
+                placeholder);
+
+        $(By.xpath(inputXpath)).scrollTo().setValue(area);
     }
 
     /**
