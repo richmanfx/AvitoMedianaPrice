@@ -12,7 +12,6 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class DirectScraping {
 
-
     private static final Logger log = LogManager.getLogger();
     private FindPage findPage = new FindPage();
     private ResultPage resultPage = new ResultPage();
@@ -35,7 +34,7 @@ public class DirectScraping {
         searching();
 
         // Собрать результаты со всех страниц
-        allObjectsResultsCollect();
+        allObjectsResultsCollect(scrapResult);
 
         // Закрыть браузер
         close();
@@ -43,12 +42,14 @@ public class DirectScraping {
 
     /**
      * Собрать результаты по объектам на всех страницах
+     * @param scrapResult Результат скрапинга
      */
-    private void allObjectsResultsCollect() {
+    private void allObjectsResultsCollect(Map<String, Object> scrapResult) {
 
         // Собрать иформацию об объектах на текущей странице
-        ArrayList<Integer> price = new ArrayList<>();
-        getOnePageObjectsPrice(price);
+        ArrayList<Integer> prices = new ArrayList<>();
+        getOnePageObjectsPrice(prices);
+        log.info("Цены: {}", prices);
 
         // Добавить к основной коллекци
 
@@ -63,13 +64,20 @@ public class DirectScraping {
 
     /**
      * Собрать цены на одной странице
-     * @param price Цена
+     * @param prices Цена
      */
-    private void getOnePageObjectsPrice(ArrayList<Integer> price) {
+    private void getOnePageObjectsPrice(ArrayList<Integer> prices) {
 
         // Количество объектов только на данной странице
         int onPageObjectsQuantity = resultPage.getObjectsOnPage();
         log.debug("Objects quantity on page: {}", onPageObjectsQuantity);
+
+        // Выставить цены в рублях в месяц за квадратный метр
+        resultPage.rentTypeDisplaySet("в месяц за м");
+
+        // Цены
+        resultPage.getPrices(prices);
+
     }
 
     /**

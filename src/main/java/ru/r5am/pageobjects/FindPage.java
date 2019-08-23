@@ -9,7 +9,6 @@ import static com.codeborne.selenide.Selenide.*;
  */
 public class FindPage extends BasePage {
 
-
     /**
      * Выбрать закладку "Снять"
      */
@@ -54,13 +53,6 @@ public class FindPage extends BasePage {
     }
 
     /**
-     * Нажать кнопку поиска
-     */
-    public void searchButtonPress() {
-            $(By.xpath("//button[contains(@data-marker,'search-filters')]")).click();
-    }
-
-    /**
      * Выбрать требуемые станции метро
      * @param metro Название станции метро
      */
@@ -78,4 +70,5 @@ public class FindPage extends BasePage {
         // Кнопка
         $(By.xpath("//button[contains(@data-marker,'popup-location/save-button')]")).click();
     }
+
 }
