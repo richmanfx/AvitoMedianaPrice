@@ -1,19 +1,23 @@
 package ru.r5am.servlets;
 
 
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.http.*;
 import com.google.common.collect.Maps;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.r5am.DirectScraping;
 import ru.r5am.SelenideSetUp;
 import ru.r5am.templater.Templater;
 
 
 public class Scraping extends HttpServlet {
+
+    private static final Logger log = LogManager.getLogger();
+
 
     @Override
     public void doPost (HttpServletRequest request, HttpServletResponse response) {
@@ -43,6 +47,8 @@ public class Scraping extends HttpServlet {
         directScraping.minMaxRemove(scrapResult);
 
         // Рассчитать медианную цену
+        Integer medianPrice = getMedianPrice(scrapResult);
+        forScrapingData.put("Медиана цены", medianPrice.toString());
 
 
         // Вывод результата
@@ -57,6 +63,30 @@ public class Scraping extends HttpServlet {
             forScrapingData.put("Error", ex.toString());
         }
 
+    }
+
+    /**
+     * Расчёт медианной цены
+     */
+    private Integer getMedianPrice(List<Integer> prices) {
+
+        Integer mediana = 0;
+
+        // Сортировать
+        prices.sort(Integer::compareTo);
+        log.info("Отсортированные цены {}", prices);
+
+        int elementsQuantity = prices.size();
+        log.info("Количество элементов с ценами {}", elementsQuantity);
+
+        if (0 != (elementsQuantity % 2)){      // Для нечётного количества
+            mediana = prices.get(((elementsQuantity - 1) / 2));
+        } else {
+            mediana = (prices.get((elementsQuantity / 2) - 1) + prices.get(elementsQuantity / 2)) / 2;
+        }
+
+        log.info("Медианное значение цены {}", mediana);
+        return mediana;
     }
 
 }
