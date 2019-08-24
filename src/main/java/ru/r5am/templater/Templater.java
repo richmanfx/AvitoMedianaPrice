@@ -21,7 +21,7 @@ public class Templater {
 
         String templatesDir = "templates";
         Jinjava jinjava = new Jinjava();
-        Map<String, Object> context = Maps.newHashMap();
+        Map<String, Map<String, String>> context = Maps.newHashMap();
         context.put("data", data);
 
 

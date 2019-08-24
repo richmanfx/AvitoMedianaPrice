@@ -59,7 +59,6 @@ th, td {
   text-align: left;
   display: table-cell;
   padding: .25em .5em;
-
 }
 
 hr {
@@ -75,6 +74,10 @@ table.parameters {
   background-color: #bbbbbb;
 }
 
+input#metro {
+  width: 50em;
+}
+
 .top-align {
   border: 0;
   vertical-align: top;
@@ -85,6 +88,11 @@ table.parameters {
 .param-value {
   font-weight: bold;
   color: #005500;
+}
+
+.result-value {
+  font-weight: bold;
+  color: #ff0000;
 }
 
 .vertical-text {

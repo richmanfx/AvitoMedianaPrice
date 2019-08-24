@@ -50,17 +50,20 @@ public class Scraping extends HttpServlet {
         Integer medianPrice = getMedianPrice(scrapResult);
         forScrapingData.put("Медиана цены", medianPrice.toString());
 
-
         // Вывод результата
         response.setContentType("text/html");
         Templater templater = new Templater();
+
+        Map<String, String> resultData = Maps.newHashMap();
+        resultData.put("medianPrice", medianPrice.toString());
+        resultData.putAll(forScrapingData);
+
         try {
             PrintWriter printWriter = response.getWriter();
-            forScrapingData.put("Error", "Ошибки нет");
-            printWriter.println(templater.getPage("scraping-result.ftl", forScrapingData));
+            printWriter.println(templater.getPage("scraping-result.ftl", resultData));
             printWriter.close();
         } catch (IOException ex) {
-            forScrapingData.put("Error", ex.toString());
+            log.error("IO Error: {0}", ex);
         }
 
     }
