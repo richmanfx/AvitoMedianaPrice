@@ -71,7 +71,7 @@ public class Scraping extends HttpServlet {
     /**
      * Расчёт медианной цены
      */
-    private Integer getMedianPrice(List<Integer> prices) {
+    Integer getMedianPrice(List<Integer> prices) {
 
         Integer mediana = 0;
 
