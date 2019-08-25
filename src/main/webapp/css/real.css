@@ -78,6 +78,15 @@ input#metro {
   width: 50em;
 }
 
+a.button {
+  appearance: button;
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  padding: 0.3em;
+  text-decoration: none;
+  color: initial;
+}
+
 .top-align {
   border: 0;
   vertical-align: top;
