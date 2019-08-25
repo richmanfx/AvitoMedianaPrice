@@ -73,7 +73,7 @@ public class Scraping extends HttpServlet {
      */
     Integer getMedianPrice(List<Integer> prices) {
 
-        Integer mediana = 0;
+        Integer mediana;
 
         // Сортировать
         prices.sort(Integer::compareTo);
