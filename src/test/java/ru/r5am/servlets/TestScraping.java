@@ -2,6 +2,9 @@ package ru.r5am.servlets;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+
+import com.google.common.collect.Maps;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.annotations.DataProvider;
@@ -44,10 +47,11 @@ public class TestScraping {
     public void testGetMedianPrice(List<Integer> testData, Integer expectedPrice) {
 
         // Фактический результат
-        Integer actualPrice = scrap.getMedianPrice(testData);
+        Map<String, String> resultData = Maps.newHashMap();
+        scrap.getMedianPrice(testData, resultData);
 
         // Проверка
-        Assert.assertEquals(actualPrice, expectedPrice);
+        Assert.assertEquals(Integer.valueOf(resultData.get("medianPrice")), expectedPrice);
 
     }
 

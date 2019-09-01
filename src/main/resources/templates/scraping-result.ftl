@@ -22,11 +22,12 @@
 
 <fieldset>
     <legend><strong>Результат</strong></legend>
+    Количество объектов: <span class="result-value">{{ data.objectsQuantity }}</span><br>
     Медианная цена: <span class="result-value">{{ data.medianPrice }}</span> рублей за м<sup>2</sup> в месяц
 </fieldset>
 
 <p>
-    <a href="/AvitoMedianaPrice/"
+    <a href="/Avito/"
        class="button"
        id="new_search_button"
        data-min-area="{{ data.minArea }}"

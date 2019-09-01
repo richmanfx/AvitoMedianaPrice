@@ -38,6 +38,9 @@ public class Scraping extends HttpServlet {
         forScrapingData.put("maxArea", maxArea);
         forScrapingData.put("metro", metro);
 
+        Map<String, String> resultData = Maps.newHashMap();
+        resultData.putAll(forScrapingData);     // Выводить в отчёт и исходные данные
+
         // Скрапинг
         ArrayList<Integer> scrapResult = new ArrayList<>();
         DirectScraping directScraping = new DirectScraping();
@@ -47,16 +50,11 @@ public class Scraping extends HttpServlet {
         directScraping.minMaxRemove(scrapResult);
 
         // Рассчитать медианную цену
-        Integer medianPrice = getMedianPrice(scrapResult);
-        forScrapingData.put("Медиана цены", medianPrice.toString());
+        getMedianPrice(scrapResult, resultData);
 
         // Вывод результата
         response.setContentType("text/html");
         Templater templater = new Templater();
-
-        Map<String, String> resultData = Maps.newHashMap();
-        resultData.put("medianPrice", medianPrice.toString());
-        resultData.putAll(forScrapingData);
 
         try {
             PrintWriter printWriter = response.getWriter();
@@ -71,7 +69,7 @@ public class Scraping extends HttpServlet {
     /**
      * Расчёт медианной цены
      */
-    Integer getMedianPrice(List<Integer> prices) {
+    void getMedianPrice(List<Integer> prices, Map<String, String> resultData) {
 
         Integer mediana;
 
@@ -79,8 +77,9 @@ public class Scraping extends HttpServlet {
         prices.sort(Integer::compareTo);
         log.info("Отсортированные цены {}", prices);
 
-        int elementsQuantity = prices.size();
+        Integer elementsQuantity = prices.size();
         log.info("Количество элементов с ценами {}", elementsQuantity);
+        resultData.put("objectsQuantity", elementsQuantity.toString());
 
         if (0 != (elementsQuantity % 2)){      // Для нечётного количества
             mediana = prices.get(((elementsQuantity - 1) / 2));
@@ -89,7 +88,7 @@ public class Scraping extends HttpServlet {
         }
 
         log.info("Медианное значение цены {}", mediana);
-        return mediana;
+        resultData.put("medianPrice", mediana.toString());
     }
 
 }
