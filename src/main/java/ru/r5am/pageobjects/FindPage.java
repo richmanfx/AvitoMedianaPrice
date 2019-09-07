@@ -1,7 +1,7 @@
 package ru.r5am.pageobjects;
 
 import org.openqa.selenium.By;
-
+import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.*;
 
 /**
@@ -61,13 +61,16 @@ public class FindPage extends BasePage {
      */
     public void metroSet(String metro) {
 
-        // Нажать ссылку выбора станции метро
+        // Нажать ссылку для выбора станций метро
         $(By.xpath("//div[@data-current-tab='metro']")).click();
 
         // Перебрать все введённые станции метро
         String[] metroList = metro.split(",");
         for (String station: metroList) {
-            $(By.xpath(String.format("//*[@class='label' and text()='%s']", station.trim()))).click();
+            SelenideElement element = $(By.xpath(String.format("//*[@class='label' and text()='%s']", station.trim())));
+            element.getCoordinates().inViewPort();        // Скролить до элемента
+            element.click();
+            sleep(1000);
         }
 
         // Кнопка

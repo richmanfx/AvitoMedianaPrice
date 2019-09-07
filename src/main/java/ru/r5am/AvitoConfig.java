@@ -6,7 +6,7 @@ import org.aeonbits.owner.Config;
 public interface AvitoConfig extends Config {
 
     // Использование удалённых браузеров, таких как "Selenium Grid" или "Solenoid"
-    @DefaultValue("true")
+    @DefaultValue("false")
     Boolean remoteBrowserFlag();
     @DefaultValue("127.0.0.1")
     String remoteSeleniumHub();
