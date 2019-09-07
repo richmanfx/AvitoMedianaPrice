@@ -131,19 +131,4 @@ public class DirectScraping {
 
     }
 
-    /**
-     * Удалить максимальную и минимальную цены
-     * @param prices Цены как результат скрапинга
-     */
-    public void minMaxRemove(List<Integer> prices) {
-        Integer maximum = prices.stream().max(Integer::compareTo).get();
-        log.debug("Maximum: {}", maximum);
-        prices.remove(maximum);
-
-        Integer minimum = prices.stream().min(Integer::compareTo).get();
-        log.debug("Minimum: {}", minimum);
-        prices.remove(minimum);
-
-        log.debug("Цены всех страниц без Min и Max: {}", prices);
-    }
 }

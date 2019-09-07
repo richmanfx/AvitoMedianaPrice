@@ -46,9 +46,6 @@ public class Scraping extends HttpServlet {
         DirectScraping directScraping = new DirectScraping();
         directScraping.scraping(forScrapingData, scrapResult);
 
-        // Максимальную и минимальную цены удалить
-        directScraping.minMaxRemove(scrapResult);
-
         // Рассчитать медианную цену
         getMedianPrice(scrapResult, resultData);
 

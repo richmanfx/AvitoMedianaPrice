@@ -21,8 +21,8 @@ $(document).ready(function() {
     localStorage.removeItem('metro');
 
     // Занести значения в поля
-    $('#min_area').val(minArea)
-    $('#max_area').val(maxArea)
-    $('#metro').val(metro)
+    $('#min_area').val(minArea);
+    $('#max_area').val(maxArea);
+    $('#metro').val(metro);
 
 });
