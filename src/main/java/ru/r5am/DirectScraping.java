@@ -17,6 +17,11 @@ public class DirectScraping {
     private FindPage findPage = new FindPage();
     private ResultPage resultPage = new ResultPage();
 
+    public DirectScraping() {
+        // Открыть сайт
+        open("https://www.avito.ru/moskva/kommercheskaya_nedvizhimost");
+    }
+
     /**
      * Непосредственно скрапинг
      * @param forScrapingData Параметры для скрапинга, введённые через форму в index.html
@@ -24,25 +29,26 @@ public class DirectScraping {
      */
     public void scraping(Map<String, String> forScrapingData, List<Integer> scrapResult) {
 
-
-        // Открыть сайт
-        open("https://www.avito.ru/moskva/kommercheskaya_nedvizhimost");
-
         // Выставить фильтры поиска
         setSearchFilters(forScrapingData);
 
         // Искать
         searching();
 
+        // Количество найденныйх объектов
+        Integer objectsQuantity = resultPage.getAllObjectsQuantity();
+        log.info("Найденных объектов: {}", objectsQuantity);
+
         // Выставить цены в рублях в месяц за квадратный метр
         resultPage.rentTypeDisplaySet("в месяц за м");
 
         // Собрать результаты со всех страниц
         allObjectsResultsCollect(scrapResult);
-        log.info("Цены всех страниц: {}", scrapResult);
+        log.debug("Цены всех страниц: {}", scrapResult);
 
         // Закрыть браузер
         close();
+
     }
 
     /**
@@ -91,7 +97,7 @@ public class DirectScraping {
         log.debug("Objects quantity on page: {}", onPageObjectsQuantity);
 
 //        // Выставить цены в рублях в месяц за квадратный метр
-//        resultPage.rentTypeDisplaySet("в месяц за м");
+//        resultPage.rentTypeDisplaySet("в месяц за м");        // TODO: Нужно ли это?
 
         // Цены
         resultPage.getPrices(prices);

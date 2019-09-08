@@ -5,6 +5,8 @@ $('#search_button').on('click', function () {
     $preloader.find('.svg_anm');
     $preloader.delay(300).fadeIn('slow');
 
+    checkProgress();        // TODO: Так и не придумал как выдавать из одного сервлета инфу через другой...
+
 });
 
 // Извлечение данных из хранилища и ввод их в поля
@@ -26,3 +28,27 @@ $(document).ready(function() {
     $('#metro').val(metro);
 
 });
+
+// Progressbar на время скрапинга
+function checkProgress() {
+
+    let progressBar = $('#progressbar');
+
+    // Получить процент уже выполненной работы
+    $.ajax({
+        url: '/AvitoMedianaPrice/GetCompletedWork',
+        type: 'GET',
+        success: function(serverAnswer){
+            progressBar.val(serverAnswer);
+
+            // Если процент меньще 100, то через секунду снова запросить
+            if (parseInt(serverAnswer) < 100) {
+                setTimeout(checkProgress, 1000);    // 1000 миллисекунд
+            }
+        },
+        error: function(){
+            alert("Ошибка при ответе на AJAX GET запрос на получение процента уже выполненной работы.");
+        }
+    });
+
+}

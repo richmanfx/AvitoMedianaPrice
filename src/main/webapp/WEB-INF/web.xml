@@ -9,11 +9,18 @@
     <servlet-name>Scraping</servlet-name>
     <servlet-class>ru.r5am.servlets.Scraping</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>GetCompletedWork</servlet-name>
+    <servlet-class>ru.r5am.servlets.GetCompletedWork</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>Scraping</servlet-name>
     <url-pattern>/Scraping</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetCompletedWork</servlet-name>
+    <url-pattern>GetCompletedWork</url-pattern>
+  </servlet-mapping>
 
 </web-app>
-

@@ -27,7 +27,7 @@
 </fieldset>
 
 <p>
-    <a href="/Avito/"
+    <a href="/AvitoMedianaPrice/"
        class="button"
        id="new_search_button"
        data-min-area="{{ data.minArea }}"

@@ -48,6 +48,14 @@ public class ResultPage extends BasePage {
     }
 
     /**
+     * Количество найденных объектов
+     */
+    public Integer getAllObjectsQuantity() {
+        String counterXpath = "//span[@data-marker='page-title/count']";
+        return Integer.valueOf($(By.xpath(counterXpath)).text().trim().replace(" ", ""));
+    }
+
+    /**
      * Получить цены объектов на странице
      * @param prices Список цен
      */
@@ -85,4 +93,5 @@ public class ResultPage extends BasePage {
     public void goToNextPage() {
         $(By.xpath(nextPageXpath)).click();
     }
+
 }

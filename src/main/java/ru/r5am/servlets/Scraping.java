@@ -72,10 +72,10 @@ public class Scraping extends HttpServlet {
 
         // Сортировать
         prices.sort(Integer::compareTo);
-        log.info("Отсортированные цены {}", prices);
+        log.debug("Отсортированные цены {}", prices);
 
         Integer elementsQuantity = prices.size();
-        log.info("Количество элементов с ценами {}", elementsQuantity);
+        log.debug("Количество элементов с ценами {}", elementsQuantity);
         resultData.put("objectsQuantity", elementsQuantity.toString());
 
         if (0 != (elementsQuantity % 2)){      // Для нечётного количества
